@@ -1,0 +1,30 @@
+cabal-version:      3.4
+name:               homework1
+version:            0.1.0.0
+
+license:            NONE
+author:             ilkecan
+maintainer:         ilkecan@protonmail.com
+
+common shared-properties
+    default-language: Haskell2010
+    build-depends:
+        base ^>=4.14.1.0
+    ghc-options:
+        -Wall
+
+library
+    import: shared-properties
+    exposed-modules:  ValidatingCreditCardNumbers
+    hs-source-dirs:   src
+
+test-suite validating-credit-card-numbers-test
+    import: shared-properties
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   tests
+    main-is:          validating-credit-card-numbers.hs
+    build-depends:
+        homework1,
+        tasty ^>=1.4.1,
+        tasty-quickcheck ^>=0.10.1.2,
+        tasty-hunit ^>=0.10.0.3
