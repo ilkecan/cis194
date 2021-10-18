@@ -3,6 +3,7 @@ import           Test.Tasty
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck         as QC
 import           ValidatingCreditCardNumbers    ( doubleEveryOther
+                                                , sumDigits
                                                 , toDigits
                                                 , toDigitsRev
                                                 )
@@ -24,7 +25,7 @@ prop_2 (QC.Positive number) =
   toDigits number == map (toInteger . digitToInt) (show number)
 
 prop_3 :: [Integer] -> Bool
-prop_3 list = (length . doubleEveryOther) list == length list
+prop_3 numbers = (length . doubleEveryOther) numbers == length numbers
 
 qcProps :: TestTree
 qcProps = testGroup
@@ -49,4 +50,7 @@ unitTests = testGroup
   $   doubleEveryOther [8, 7, 6, 5]
   @?= [16, 7, 12, 5]
   , testCase "doubleEveryOther odd" $ doubleEveryOther [1, 2, 3] @?= [1, 4, 3]
+  , testCase "sumDigits" $ sumDigits [16, 7, 12, 5] @?= 22
+  , testCase "sumDigits empty" $ sumDigits [] @?= 0
+  , testCase "sumDigits zero" $ sumDigits [0] @?= 0
   ]
