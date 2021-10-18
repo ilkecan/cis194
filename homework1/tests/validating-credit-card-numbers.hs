@@ -5,7 +5,6 @@ import           Test.Tasty.QuickCheck         as QC
 import           ValidatingCreditCardNumbers    ( doubleEveryOther
                                                 , sumDigits
                                                 , toDigits
-                                                , toDigitsRev
                                                 , validate
                                                 )
 
@@ -18,31 +17,26 @@ tests = testGroup "Tests" [properties, unitTests]
 properties :: TestTree
 properties = testGroup "Properties" [qcProps]
 
-prop_1 :: Integer -> Bool
-prop_1 number = toDigits number == (reverse . toDigitsRev) number
-
-prop_2 :: QC.Positive Integer -> Bool
-prop_2 (QC.Positive number) =
+prop_1 :: QC.Positive Integer -> Bool
+prop_1 (QC.Positive number) =
   toDigits number == map (toInteger . digitToInt) (show number)
 
-prop_3 :: [Integer] -> Bool
-prop_3 numbers = (length . doubleEveryOther) numbers == length numbers
+prop_2 :: [Integer] -> Bool
+prop_2 numbers = (length . doubleEveryOther) numbers == length numbers
 
 qcProps :: TestTree
 qcProps = testGroup
   "QuickCheck properties"
-  [ QC.testProperty "toDigits == reverse . toDigitsRev" prop_1
-  , QC.testProperty
+  [ QC.testProperty
     "toDigits number == map (toInteger . digitToInt) (show number) where number > 0"
-    prop_2
-  , QC.testProperty "length . doubleEveryOther == length" prop_3
+    prop_1
+  , QC.testProperty "length . doubleEveryOther == length" prop_2
   ]
 
 unitTests :: TestTree
 unitTests = testGroup
   "HUnit tests"
   [ testCase "toDigits" $ toDigits 1234 @?= [1, 2, 3, 4]
-  , testCase "toDigitsRev" $ toDigitsRev 1234 @?= [4, 3, 2, 1]
   , testCase "toDigits 0" $ toDigits 0 @?= []
   , testCase "toDigits negative" $ toDigits (-17) @?= []
   , testCase "doubleEveryOther empty" $ doubleEveryOther [] @?= []

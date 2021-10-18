@@ -1,4 +1,9 @@
-module ValidatingCreditCardNumbers where
+module ValidatingCreditCardNumbers
+  ( toDigits
+  , doubleEveryOther
+  , sumDigits
+  , validate
+  ) where
 
 -- exercise 1
 toDigits :: Integer -> [Integer]
