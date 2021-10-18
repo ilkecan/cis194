@@ -6,6 +6,7 @@ import           ValidatingCreditCardNumbers    ( doubleEveryOther
                                                 , sumDigits
                                                 , toDigits
                                                 , toDigitsRev
+                                                , validate
                                                 )
 
 main :: IO ()
@@ -53,4 +54,6 @@ unitTests = testGroup
   , testCase "sumDigits" $ sumDigits [16, 7, 12, 5] @?= 22
   , testCase "sumDigits empty" $ sumDigits [] @?= 0
   , testCase "sumDigits zero" $ sumDigits [0] @?= 0
+  , testCase "validate true" $ validate 4012888888881881 @?= True
+  , testCase "validate false" $ validate 4012888888881882 @?= False
   ]

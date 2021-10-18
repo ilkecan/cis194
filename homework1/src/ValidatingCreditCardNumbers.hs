@@ -37,3 +37,7 @@ mapCyclic = zipWith id . cycle
 -- exercise 3
 sumDigits :: [Integer] -> Integer
 sumDigits = sum . map (sum . toDigits)
+
+-- exercise 4
+validate :: Integer -> Bool
+validate = (== 0) . (`mod` 10) . sumDigits . doubleEveryOther . toDigits
