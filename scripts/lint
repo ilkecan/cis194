@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+shopt -s globstar
+
+directory="${@:-$PWD}"
+
+hlint "$directory"
+ormolu --mode="inplace" "$directory"/**/*.hs

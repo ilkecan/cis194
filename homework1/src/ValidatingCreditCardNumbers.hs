@@ -1,25 +1,27 @@
 module ValidatingCreditCardNumbers
-  ( toDigits
-  , doubleEveryOther
-  , sumDigits
-  , validate
-  ) where
+  ( toDigits,
+    doubleEveryOther,
+    sumDigits,
+    validate,
+  )
+where
 
 -- exercise 1
 toDigits :: Integer -> [Integer]
 toDigits = reverse . toDigitsRev
 
 toDigitsRev :: Integer -> [Integer]
-toDigitsRev n | n > 9     = let (q, r) = quotRem n 10 in r : toDigitsRev q
-              | n > 0     = [n]
-              | otherwise = []
+toDigitsRev n
+  | n > 9 = let (q, r) = quotRem n 10 in r : toDigitsRev q
+  | n > 0 = [n]
+  | otherwise = []
 
 -- exercise 2 - solution 1
 -- doubleEveryOther :: [Integer] -> [Integer]
 -- doubleEveryOther = reverse . doubleEveryOtherRev . reverse
 
 -- doubleEveryOtherRev :: [Integer] -> [Integer]
--- doubleEveryOtherRev (x0:x1:xs) = x0 : 2 * x1 : doubleEveryOtherRev xs
+-- doubleEveryOtherRev (x0 : x1 : xs) = x0 : 2 * x1 : doubleEveryOtherRev xs
 -- doubleEveryOtherRev numbers = numbers
 
 -- exercise 2 - solution 2
@@ -30,7 +32,7 @@ toDigitsRev n | n > 9     = let (q, r) = quotRem n 10 in r : toDigitsRev q
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther numbers@(x : xs)
   | even . length $ numbers = doubleEveryOtherRev numbers
-  | otherwise               = x : doubleEveryOtherRev xs
+  | otherwise = x : doubleEveryOtherRev xs
 doubleEveryOther numbers = numbers
 
 doubleEveryOtherRev :: [Integer] -> [Integer]
