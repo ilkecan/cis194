@@ -1,0 +1,8 @@
+packages:
+    homework1/
+
+package *
+  ghc-options:
+    -Wall
+    -fwrite-ide-info
+    -hiedir=.hie

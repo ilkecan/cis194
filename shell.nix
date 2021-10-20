@@ -2,9 +2,11 @@ let
   pkgs = import <nixpkgs> {};
 
   ghcEnv = pkgs.ghc.withPackages (haskellPkgs: with haskellPkgs; [
+    stan
     tasty
     tasty-hunit
     tasty-quickcheck
+    weeder
   ]);
 in
 

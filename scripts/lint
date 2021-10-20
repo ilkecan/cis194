@@ -3,6 +3,14 @@
 shopt -s globstar
 
 directory="${@:-$PWD}"
+hie_directory="$directory/.hie"
+weeder_config="${directory}/weeder.dhall"
 
 hlint "$directory"
 ormolu --mode="inplace" "$directory"/**/*.hs
+
+if [ -d "${hie_directory}" ]; then
+    export STAN_USE_DEFAULT_CONFIG="True"
+    stan --hiedir="$hie_directory" --short
+    weeder --config="${weeder_config}" --hie-directory="$hie_directory"
+fi
