@@ -2,7 +2,20 @@ packages:
     homework1/
 
 package *
-  ghc-options:
-    -Wall
-    -fwrite-ide-info
-    -hiedir=.hie
+    ghc-options:
+        -Wall
+        -fwrite-ide-info
+        -hiedir=.hie
+
+constraints:
+    base ^>=4.14.1.0,
+    tasty ^>=1.4.1,
+    tasty-bench ^>=0.2.5,
+    tasty-hunit ^>=0.10.0.3,
+    tasty-quickcheck ^>=0.10.1.2,
+
+jobs: $ncpus
+optimization: 2
+-- try again with cabal-install v3.6+
+-- https://github.com/haskell/cabal/issues/5213
+-- coverage: True

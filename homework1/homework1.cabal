@@ -8,20 +8,40 @@ maintainer:         ilkecan@protonmail.com
 
 common shared-properties
     default-language: Haskell2010
-    build-depends:
-        base ^>=4.14.1.0
+    build-depends: base
+
 library
     import: shared-properties
-    exposed-modules:  ValidatingCreditCardNumbers
-    hs-source-dirs:   src
+    exposed-modules:
+        ValidatingCreditCardNumbers
+    hs-source-dirs: src
+    other-modules:
+        Exercise1
+        Exercise2
+        Exercise3
+        Exercise4
 
-test-suite validating-credit-card-numbers-test
+library exercise2
+    import: shared-properties
+    exposed-modules: Exercise2
+    hs-source-dirs: src
+
+test-suite test-validating-credit-card-numbers
     import: shared-properties
     type:             exitcode-stdio-1.0
     hs-source-dirs:   tests
-    main-is:          validating-credit-card-numbers.hs
+    main-is:          test-ValidatingCreditCardNumbers.hs
     build-depends:
         homework1,
-        tasty ^>=1.4.1,
-        tasty-quickcheck ^>=0.10.1.2,
-        tasty-hunit ^>=0.10.0.3
+        tasty,
+        tasty-quickcheck,
+        tasty-hunit,
+
+benchmark bench-exercise2
+    import: shared-properties
+    type:           exitcode-stdio-1.0
+    hs-source-dirs: benches
+    main-is:        bench-Exercise2.hs
+    build-depends:
+        homework1:exercise2,
+        tasty-bench,

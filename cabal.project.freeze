@@ -25,6 +25,7 @@ constraints: any.QuickCheck ==2.14.2,
              any.stm ==2.5.0.0,
              any.tagged ==0.8.6.1,
              any.tasty ==1.4.1,
+             any.tasty-bench ==0.2.5,
              any.tasty-hunit ==0.10.0.3,
              any.tasty-quickcheck ==0.10.1.2,
              any.template-haskell ==2.16.0.0,
@@ -34,4 +35,4 @@ constraints: any.QuickCheck ==2.14.2,
              any.unbounded-delays ==0.1.1.1,
              any.unix ==2.7.2.2,
              any.wcwidth ==0.0.2
-index-state: HEAD
+index-state: hackage.haskell.org 2021-10-20T17:36:31Z

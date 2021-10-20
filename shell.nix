@@ -2,20 +2,21 @@ let
   pkgs = import <nixpkgs> {};
 
   ghcEnv = pkgs.ghc.withPackages (haskellPkgs: with haskellPkgs; [
-    stan
     tasty
+    tasty-bench
     tasty-hunit
     tasty-quickcheck
-    weeder
   ]);
 in
 
 pkgs.mkShell {
-  packages = with pkgs; [
+  packages = with pkgs; with haskellPackages; [
     cabal-install
     ghcEnv
     hlint
     ormolu
+    stan
+    weeder
   ];
 
   shellHook =''
