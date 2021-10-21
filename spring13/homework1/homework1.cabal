@@ -2,7 +2,7 @@ cabal-version:  3.4
 name:           homework1
 version:        0.1.0.0
 
-license:        NONE
+license:        MPL-2.0
 author:         ilkecan
 maintainer:     ilkecan@protonmail.com
 
