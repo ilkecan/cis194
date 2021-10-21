@@ -8,7 +8,6 @@ if [ -d "${1}" ]; then
     cd "${1}"
 fi
 
-hlint .
 ormolu --mode="inplace" ./**/*.hs
 
 if [ -f ".stan.toml" ]; then
@@ -19,3 +18,5 @@ fi
 if [ -f "./weeder.dhall" ]; then
     weeder --hie-directory="$hie_directory"
 fi
+
+hlint .

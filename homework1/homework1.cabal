@@ -22,6 +22,7 @@ library
     Exercise3
     Exercise4
     Exercise5
+    Exercise6
 
 library exercise2
   import:           shared-properties
