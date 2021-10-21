@@ -19,7 +19,7 @@ doubleEveryOtherRev = doubleEveryOtherRev1
 --
 
 doubleEveryOther1 :: [Integer] -> [Integer]
-doubleEveryOther1 = reverse . doubleEveryOtherRev1 . reverse
+doubleEveryOther1 = reverse . doubleEveryOtherRev . reverse
 
 --
 doubleEveryOther2 :: [Integer] -> [Integer]

@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
 
   ghcEnv = pkgs.ghc.withPackages (haskellPkgs: with haskellPkgs; [
     tasty
@@ -14,12 +14,15 @@ pkgs.mkShell {
     cabal-install
     ghcEnv
     hlint
+    nixpkgs-fmt
     ormolu
+    reuse
+    shellcheck
     stan
     weeder
   ];
 
-  shellHook =''
+  shellHook = ''
     export PATH="${toString ./scripts}:$PATH"
   '';
 }

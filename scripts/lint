@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
 
+function print_on_error() {
+    tmp="$(mktemp)"
+    if eval "$1" &> "$tmp"; then
+        echo "${1%% *}: OK"
+    else
+        cat "$tmp"
+    fi
+    rm "$tmp"
+}
+
 shopt -s globstar
 
-hie_directory="$(dirname "${BASH_SOURCE[0]}")/../dist-newstyle"
+project_root="$(dirname "${BASH_SOURCE[0]}")/.."
+hie_directory="$project_root/dist-newstyle"
 
-if [ -d "${1}" ]; then
-    cd "${1}"
+if [ -d "$1" ]; then
+    cd "$1" || exit
 fi
+
+print_on_error "reuse lint"
+print_on_error "nixpkgs-fmt '$project_root'"
+print_on_error "shellcheck '$project_root'/scripts/*"
 
 ormolu --mode="inplace" ./**/*.hs
 
@@ -16,7 +31,7 @@ if [ -f ".stan.toml" ]; then
 fi
 
 if [ -f "./weeder.dhall" ]; then
-    weeder --hie-directory="$hie_directory"
+    print_on_error "weeder --hie-directory='$hie_directory'"
 fi
 
-hlint .
+print_on_error 'hlint .'
