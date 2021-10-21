@@ -2,15 +2,20 @@
 
 shopt -s globstar
 
-directory="${@:-$PWD}"
-hie_directory="$directory/.hie"
-weeder_config="${directory}/weeder.dhall"
+hie_directory="$(dirname "${BASH_SOURCE[0]}")/../dist-newstyle"
 
-hlint "$directory"
-ormolu --mode="inplace" "$directory"/**/*.hs
+if [ -d "${1}" ]; then
+    cd "${1}"
+fi
 
-if [ -d "${hie_directory}" ]; then
+hlint .
+ormolu --mode="inplace" ./**/*.hs
+
+if [ -f ".stan.toml" ]; then
     export STAN_USE_DEFAULT_CONFIG="True"
     stan --hiedir="$hie_directory" --short
-    weeder --config="${weeder_config}" --hie-directory="$hie_directory"
+fi
+
+if [ -f "./weeder.dhall" ]; then
+    weeder --hie-directory="$hie_directory"
 fi

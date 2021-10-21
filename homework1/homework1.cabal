@@ -1,47 +1,60 @@
-cabal-version:      3.4
-name:               homework1
-version:            0.1.0.0
+cabal-version:  3.4
+name:           homework1
+version:        0.1.0.0
 
-license:            NONE
-author:             ilkecan
-maintainer:         ilkecan@protonmail.com
+license:        NONE
+author:         ilkecan
+maintainer:     ilkecan@protonmail.com
 
 common shared-properties
-    default-language: Haskell2010
-    build-depends: base
+  default-language: Haskell2010
+  build-depends:    base
 
 library
-    import: shared-properties
-    exposed-modules:
-        ValidatingCreditCardNumbers
-    hs-source-dirs: src
-    other-modules:
-        Exercise1
-        Exercise2
-        Exercise3
-        Exercise4
+  import:         shared-properties
+  hs-source-dirs: src
+  exposed-modules:
+    ValidatingCreditCardNumbers
+    TheTowersOfHanoi
+  other-modules:
+    Exercise1
+    Exercise2
+    Exercise3
+    Exercise4
+    Exercise5
 
 library exercise2
-    import: shared-properties
-    exposed-modules: Exercise2
-    hs-source-dirs: src
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:  Exercise2
 
 test-suite test-validating-credit-card-numbers
-    import: shared-properties
-    type:             exitcode-stdio-1.0
-    hs-source-dirs:   tests
-    main-is:          test-ValidatingCreditCardNumbers.hs
-    build-depends:
-        homework1,
-        tasty,
-        tasty-quickcheck,
-        tasty-hunit,
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   tests
+  main-is:          test-ValidatingCreditCardNumbers.hs
+  build-depends:
+    homework1,
+    tasty,
+    tasty-quickcheck,
+    tasty-hunit,
+
+test-suite test-the-towers-of-hanoi
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   tests
+  main-is:          test-TheTowersOfHanoi.hs
+  build-depends:
+    homework1,
+    tasty,
+    tasty-quickcheck,
+    tasty-hunit,
 
 benchmark bench-exercise2
-    import: shared-properties
-    type:           exitcode-stdio-1.0
-    hs-source-dirs: benches
-    main-is:        bench-Exercise2.hs
-    build-depends:
-        homework1:exercise2,
-        tasty-bench,
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-Exercise2.hs
+  build-depends:
+    homework1:exercise2,
+    tasty-bench,
