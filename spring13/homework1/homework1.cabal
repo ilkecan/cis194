@@ -29,7 +29,6 @@ library exercise2
   hs-source-dirs:   src
   exposed-modules:  Exercise2
 
-test-suite test-validating-credit-card-numbers
 library exercise6
   import:           shared-properties
   hs-source-dirs:   src
@@ -37,6 +36,7 @@ library exercise6
   other-modules:
     Exercise5,
 
+test-suite validating-credit-card-numbers
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   tests
@@ -47,7 +47,7 @@ library exercise6
     tasty-quickcheck,
     tasty-hunit,
 
-test-suite test-the-towers-of-hanoi
+test-suite the-towers-of-hanoi
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   tests
