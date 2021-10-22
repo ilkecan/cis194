@@ -22,6 +22,7 @@ doubleEveryOther1 :: [Integer] -> [Integer]
 doubleEveryOther1 = reverse . doubleEveryOtherRev . reverse
 
 --
+-- author: gsingh2011, https://stackoverflow.com/a/24178579
 doubleEveryOther2 :: [Integer] -> [Integer]
 doubleEveryOther2 numbers = fst $ foldr (\x (acc, bool) -> ((if bool then 2 * x else x) : acc, not bool)) ([], False) numbers
 
