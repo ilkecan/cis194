@@ -13,7 +13,6 @@ function print_on_error() {
 shopt -s globstar
 
 project_root="$(dirname "${BASH_SOURCE[0]}")/.."
-hie_directory="$project_root/dist-newstyle"
 
 if [ -d "$1" ]; then
     cd "$1" || exit
@@ -24,6 +23,9 @@ print_on_error "nixpkgs-fmt '$project_root'"
 print_on_error "shellcheck '$project_root'/scripts/*"
 
 ormolu --mode="inplace" ./**/*.hs
+
+print_on_error "cabal build all &> /dev/null"
+hie_directory="$project_root/dist-newstyle"
 
 if [ -f ".stan.toml" ]; then
     export STAN_USE_DEFAULT_CONFIG="True"
