@@ -1,9 +1,9 @@
 {
     roots = [
-        "^Exercise2.doubleEveryOther1$",
-        "^Exercise2.doubleEveryOther2$",
-        "^Exercise2.doubleEveryOtherRev2$",
-        "^Exercise6.idealK2$",
+        "^Exercise2.doubleEveryOther",
+        "^Exercise2.doubleEveryOtherRev",
+        "^Exercise6.hanoi4$",
+        "^Exercise6.idealK",
         "^Main.main$",
     ],
     type-class-roots = True,

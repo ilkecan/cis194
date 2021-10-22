@@ -11,8 +11,8 @@ common shared-properties
   build-depends:    base
 
 library
-  import:         shared-properties
-  hs-source-dirs: src
+  import:           shared-properties
+  hs-source-dirs:   src
   exposed-modules:
     ValidatingCreditCardNumbers
     TheTowersOfHanoi
