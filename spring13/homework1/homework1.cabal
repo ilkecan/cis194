@@ -51,11 +51,20 @@ test-suite test-the-towers-of-hanoi
     tasty-quickcheck,
     tasty-hunit,
 
-benchmark bench-exercise2
+benchmark doubleEveryOther
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   benches
-  main-is:          bench-Exercise2.hs
+  main-is:          bench-doubleEveryOther.hs
+  build-depends:
+    homework1:exercise2,
+    tasty-bench,
+
+benchmark doubleEveryOtherRev
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-doubleEveryOtherRev.hs
   build-depends:
     homework1:exercise2,
     tasty-bench,
