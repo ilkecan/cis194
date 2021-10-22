@@ -30,6 +30,13 @@ library exercise2
   exposed-modules:  Exercise2
 
 test-suite test-validating-credit-card-numbers
+library exercise6
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:  Exercise6
+  other-modules:
+    Exercise5,
+
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   tests
@@ -67,4 +74,13 @@ benchmark doubleEveryOtherRev
   main-is:          bench-doubleEveryOtherRev.hs
   build-depends:
     homework1:exercise2,
+    tasty-bench,
+
+benchmark idealK
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-idealK.hs
+  build-depends:
+    homework1:exercise6,
     tasty-bench,
