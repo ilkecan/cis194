@@ -29,7 +29,9 @@ qcProps :: TestTree
 qcProps =
   testGroup
     "QuickCheck properties"
-    [ QC.testProperty "toDigits number == map (toInteger . digitToInt) (show number) where number > 0" prop_1,
+    [ QC.testProperty
+        "toDigits n == map (toInteger . digitToInt) (show n) where n > 0"
+        prop_1,
       QC.testProperty "length . doubleEveryOther == length" prop_2
     ]
 
@@ -42,8 +44,10 @@ unitTests =
       testCase "toDigits negative" $ toDigits (-17) @?= [],
       testCase "doubleEveryOther empty" $ doubleEveryOther [] @?= [],
       testCase "doubleEveryOther single" $ doubleEveryOther [3] @?= [3],
-      testCase "doubleEveryOther even" $ doubleEveryOther [8, 7, 6, 5] @?= [16, 7, 12, 5],
-      testCase "doubleEveryOther odd" $ doubleEveryOther [1, 2, 3] @?= [1, 4, 3],
+      testCase "doubleEveryOther even" $
+        doubleEveryOther [8, 7, 6, 5] @?= [16, 7, 12, 5],
+      testCase "doubleEveryOther odd" $
+        doubleEveryOther [1, 2, 3] @?= [1, 4, 3],
       testCase "sumDigits" $ sumDigits [16, 7, 12, 5] @?= 22,
       testCase "sumDigits empty" $ sumDigits [] @?= 0,
       testCase "sumDigits zero" $ sumDigits [0] @?= 0,

@@ -17,6 +17,7 @@ pkgs.mkShell {
     nixpkgs-fmt
     ormolu
     reuse
+    scan
     shellcheck
     stan
     weeder

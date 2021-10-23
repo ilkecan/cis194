@@ -10,8 +10,6 @@ function print_on_error() {
     rm "$tmp"
 }
 
-shopt -s globstar
-
 project_root="$(dirname "${BASH_SOURCE[0]}")/.."
 
 if [ -d "$1" ]; then
@@ -22,7 +20,11 @@ print_on_error "reuse lint"
 print_on_error "nixpkgs-fmt '$project_root'"
 print_on_error "shellcheck '$project_root'/scripts/*"
 
-ormolu --mode="inplace" ./**/*.hs
+shopt -s globstar
+GLOBIGNORE='**/dist-newstyle/**:dist-newstyle/**'
+haskell_files=(./**/*.hs)
+
+ormolu --mode="inplace" "${haskell_files[@]}"
 
 print_on_error "cabal build all &> /dev/null"
 hie_directory="$project_root/dist-newstyle"
@@ -37,3 +39,4 @@ if [ -f "./weeder.dhall" ]; then
 fi
 
 print_on_error 'hlint .'
+scan --check-spacing=False --join-comments=False "${haskell_files[@]}"

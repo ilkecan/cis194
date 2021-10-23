@@ -50,14 +50,18 @@ hanoi4MinimumNumberOfMoves =
 prop_2 :: Gen Bool
 prop_2 = do
   n <- choose (0, 20)
-  return $ length (hanoi4 n "a" "b" "c" "d") == hanoi4MinimumNumberOfMoves !! fromIntegral n
+  return $
+    length (hanoi4 n "a" "b" "c" "d")
+      == hanoi4MinimumNumberOfMoves !! fromIntegral n
 
 qcProps :: TestTree
 qcProps =
   testGroup
     "QuickCheck properties"
     [ QC.testProperty "length . hanoi n == 2^n - 1" prop_1,
-      QC.testProperty "length . hanoi4 n == hanoi4MinimumNumberOfMoves !! n" prop_2
+      QC.testProperty
+        "length . hanoi4 n == hanoi4MinimumNumberOfMoves !! n"
+        prop_2
     ]
 
 unitTests :: TestTree
@@ -66,9 +70,12 @@ unitTests =
     "HUnit tests"
     [ testCase "hanoi 0" $ hanoi 0 "a" "b" "c" @?= [],
       testCase "hanoi 1" $ hanoi 1 "a" "b" "c" @?= [("a", "b")],
-      testCase "hanoi 2" $ hanoi 2 "a" "b" "c" @?= [("a", "c"), ("a", "b"), ("c", "b")],
+      testCase "hanoi 2" $
+        hanoi 2 "a" "b" "c" @?= [("a", "c"), ("a", "b"), ("c", "b")],
       testCase "hanoi4 0" $ hanoi4 0 "a" "b" "c" "d" @?= [],
       testCase "hanoi4 1" $ hanoi4 1 "a" "b" "c" "d" @?= [("a", "b")],
-      testCase "hanoi4 2" $ hanoi4 2 "a" "b" "c" "d" @?= [("a", "c"), ("a", "b"), ("c", "b")],
-      testCase "length . hanoi4 15 == 129" $ length (hanoi4 15 "a" "b" "c" "d") @?= 129
+      testCase "hanoi4 2" $
+        hanoi4 2 "a" "b" "c" "d" @?= [("a", "c"), ("a", "b"), ("c", "b")],
+      testCase "length . hanoi4 15 == 129" $
+        length (hanoi4 15 "a" "b" "c" "d") @?= 129
     ]
