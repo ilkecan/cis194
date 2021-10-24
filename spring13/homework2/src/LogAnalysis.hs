@@ -1,8 +1,9 @@
 module LogAnalysis
-  ( parseMessage,
-    parse,
+  ( parse,
+    parseMessage,
     insert,
     build,
+    inOrder,
   )
 where
 
@@ -12,3 +13,4 @@ import Exercise1
   )
 import Exercise2 (insert)
 import Exercise3 (build)
+import Exercise4 (inOrder)

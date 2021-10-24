@@ -20,6 +20,7 @@ library
     Exercise1
     Exercise2
     Exercise3
+    Exercise4
 
 test-suite log-analysis
   import:           shared-properties

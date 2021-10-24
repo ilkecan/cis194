@@ -5,6 +5,7 @@ import Log
   )
 import LogAnalysis
   ( build,
+    inOrder,
     insert,
     parseMessage,
   )
@@ -24,6 +25,41 @@ sampleLogMessages =
     LogMessage (Error 20) 2 "Too many pickles",
     LogMessage Info 9 "Back from lunch"
   ]
+
+sampleLogMessageTree :: MessageTree
+sampleLogMessageTree =
+  Node
+    ( Node
+        (Node Leaf (LogMessage Info 1 "Nothing to report") Leaf)
+        (LogMessage (Error 20) 2 "Too many pickles")
+        ( Node
+            ( Node
+                ( Node
+                    Leaf
+                    (LogMessage (Error 70) 3 "Way too many pickles")
+                    (Node Leaf (LogMessage Info 4 "Everything normal") Leaf)
+                )
+                (LogMessage Warning 5 "Flange is due for a check-up")
+                ( Node
+                    Leaf
+                    (LogMessage Info 6 "Completed armadillo processing")
+                    Leaf
+                )
+            )
+            (LogMessage Info 7 "Out for lunch, back in two time steps")
+            ( Node
+                Leaf
+                ( LogMessage
+                    (Error 65)
+                    8
+                    "Bad pickle-flange interaction detected"
+                )
+                Leaf
+            )
+        )
+    )
+    (LogMessage Info 9 "Back from lunch")
+    (Node Leaf (LogMessage Info 11 "Initiating self-destruct sequence") Leaf)
 
 main :: IO ()
 main = defaultMain tests
@@ -73,46 +109,22 @@ unitTests =
        in testCase "insert Unknown 2" $
             insert m2 mt @?= Node Leaf m1 (Node Leaf m2 Leaf),
       -- Exercise3
-      testCase "build" $
-        build sampleLogMessages
-          @?= Node
-            ( Node
-                (Node Leaf (LogMessage Info 1 "Nothing to report") Leaf)
-                (LogMessage (Error 20) 2 "Too many pickles")
-                ( Node
-                    ( Node
-                        ( Node
-                            Leaf
-                            (LogMessage (Error 70) 3 "Way too many pickles")
-                            ( Node
-                                Leaf
-                                (LogMessage Info 4 "Everything normal")
-                                Leaf
-                            )
-                        )
-                        (LogMessage Warning 5 "Flange is due for a check-up")
-                        ( Node
-                            Leaf
-                            (LogMessage Info 6 "Completed armadillo processing")
-                            Leaf
-                        )
-                    )
-                    (LogMessage Info 7 "Out for lunch, back in two time steps")
-                    ( Node
-                        Leaf
-                        ( LogMessage
-                            (Error 65)
-                            8
-                            "Bad pickle-flange interaction detected"
-                        )
-                        Leaf
-                    )
-                )
-            )
-            (LogMessage Info 9 "Back from lunch")
-            ( Node
-                Leaf
-                (LogMessage Info 11 "Initiating self-destruct sequence")
-                Leaf
-            )
+      testCase "build" $ build sampleLogMessages @?= sampleLogMessageTree,
+      -- Exercise4
+      testCase "inOrder" $
+        inOrder sampleLogMessageTree
+          @?= [ LogMessage Info 1 "Nothing to report",
+                LogMessage (Error 20) 2 "Too many pickles",
+                LogMessage (Error 70) 3 "Way too many pickles",
+                LogMessage Info 4 "Everything normal",
+                LogMessage Warning 5 "Flange is due for a check-up",
+                LogMessage Info 6 "Completed armadillo processing",
+                LogMessage Info 7 "Out for lunch, back in two time steps",
+                LogMessage
+                  (Error 65)
+                  8
+                  "Bad pickle-flange interaction detected",
+                LogMessage Info 9 "Back from lunch",
+                LogMessage Info 11 "Initiating self-destruct sequence"
+              ]
     ]
