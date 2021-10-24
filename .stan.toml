@@ -1,4 +1,5 @@
 ignore = [
+    # spring13/homework1
     { id = "OBS-STAN-0005-YrzpQi-55:37" },
     { id = "OBS-STAN-0006-u5IQ8D-11:26" },
     { id = "OBS-STAN-0101-u5IQ8D-17:21" },

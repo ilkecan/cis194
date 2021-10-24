@@ -29,14 +29,10 @@ ormolu --mode="inplace" "${haskell_files[@]}"
 print_on_error "cabal build all &> /dev/null"
 hie_directory="$project_root/dist-newstyle"
 
-if [ -f ".stan.toml" ]; then
-    export STAN_USE_DEFAULT_CONFIG="True"
-    stan --hiedir="$hie_directory" --short
-fi
+export STAN_USE_DEFAULT_CONFIG="True"
+stan --hiedir="$hie_directory" --config-file="$project_root/.stan.toml" --short
 
-if [ -f "./weeder.dhall" ]; then
-    print_on_error "weeder --hie-directory='$hie_directory'"
-fi
+print_on_error "weeder --hie-directory='$hie_directory' --config='$project_root/weeder.dhall'"
 
 print_on_error 'hlint .'
 scan --check-spacing=False --join-comments=False "${haskell_files[@]}"
