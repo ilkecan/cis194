@@ -19,6 +19,7 @@ library
   other-modules:
     Exercise1
     Exercise2
+    Exercise3
 
 test-suite log-analysis
   import:           shared-properties
