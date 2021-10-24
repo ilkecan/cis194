@@ -1,9 +1,11 @@
 import Log
   ( LogMessage (LogMessage, Unknown),
+    MessageTree (Leaf, Node),
     MessageType (Error, Info, Warning),
   )
 import LogAnalysis
-  ( parseMessage,
+  ( insert,
+    parseMessage,
   )
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -35,7 +37,7 @@ unitTests =
       testCase "parseMessage Unknown" $
         parseMessage "This is not in the right format"
           @?= Unknown "This is not in the right format",
-      testCase "parseMessage \"\"" $ parseMessage "" @?= Unknown ""
+      testCase "parseMessage \"\"" $ parseMessage "" @?= Unknown "",
       -- TODO: learn how to test `parse` using `testParse`
       -- Couldn't match expected type 'IO [LogMessage]'
       --             with actual type '[LogMessage]'
@@ -55,4 +57,18 @@ unitTests =
       --           LogMessage (Error 20) 2 "Too many pickles",
       --           LogMessage Info 9 "Back from lunch"
       --         ],
+      -- Exercise2
+      testCase "insert Unknown" $ insert (Unknown "") Leaf @?= Leaf,
+      let mt = Node Leaf (LogMessage Info 1 "") Leaf
+       in testCase "insert to left" $ insert (Unknown "") mt @?= mt,
+      let m1 = LogMessage Info 2 ""
+          m2 = LogMessage Info 1 ""
+          mt = Node Leaf m1 Leaf
+       in testCase "insert to right" $
+            insert m2 mt @?= Node (Node Leaf m2 Leaf) m1 Leaf,
+      let m1 = LogMessage Info 2 ""
+          m2 = LogMessage Info 3 ""
+          mt = Node Leaf m1 Leaf
+       in testCase "insert Unknown 2" $
+            insert m2 mt @?= Node Leaf m1 (Node Leaf m2 Leaf)
     ]

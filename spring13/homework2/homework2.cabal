@@ -18,6 +18,7 @@ library
     LogAnalysis
   other-modules:
     Exercise1
+    Exercise2
 
 test-suite log-analysis
   import:           shared-properties
