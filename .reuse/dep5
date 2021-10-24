@@ -4,6 +4,7 @@ Upstream-Contact: ilkecan <ilkecan@protonmail.com>
 Source: https://github.com/ilkecan/cis194
 
 Files:
+    *.log
     *.pdf
     cabal.project.freeze
 Copyright: 2021 ilkecan <ilkecan@protonmail.com>

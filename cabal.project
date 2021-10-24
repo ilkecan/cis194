@@ -1,10 +1,16 @@
 packages:
   spring13/homework1/
+  spring13/homework2/
 
 package *
   ghc-options:
-    -Wall
     -fwrite-ide-info
+    -Wall
+    -Werror
+    -Wcompat
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wredundant-constraints
 
 constraints:
   base ^>=4.14.1.0,

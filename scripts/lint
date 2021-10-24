@@ -35,4 +35,4 @@ stan --hiedir="$hie_directory" --config-file="$project_root/.stan.toml" --short
 print_on_error "weeder --hie-directory='$hie_directory' --config='$project_root/weeder.dhall'"
 
 print_on_error 'hlint .'
-scan --check-spacing=False --join-comments=False "${haskell_files[@]}"
+scan --check-spacing=False --join-comments=False --check-comments=False "${haskell_files[@]}"
