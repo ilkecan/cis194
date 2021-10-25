@@ -1,0 +1,30 @@
+cabal-version:  3.4
+name:           homework3
+version:        0.1.0.0
+
+license:        MPL-2.0
+author:         ilkecan
+maintainer:     ilkecan@protonmail.com
+
+common shared-properties
+  default-language: Haskell2010
+  build-depends:    base
+
+library
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:
+    Golf
+  other-modules:
+    Exercise1
+
+test-suite golf
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   tests
+  main-is:          test-Golf.hs
+  build-depends:
+    homework3,
+    tasty,
+    tasty-quickcheck,
+    tasty-hunit,

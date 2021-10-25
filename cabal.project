@@ -1,6 +1,7 @@
 packages:
   spring13/homework1/
   spring13/homework2/
+  spring13/homework3/
 
 package *
   ghc-options:
