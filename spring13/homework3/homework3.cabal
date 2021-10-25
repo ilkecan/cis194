@@ -17,6 +17,7 @@ library
     Golf
   other-modules:
     Exercise1
+    Exercise2
 
 test-suite golf
   import:           shared-properties

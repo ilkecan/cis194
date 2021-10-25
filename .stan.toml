@@ -23,6 +23,8 @@ ignore = [
     { id = "OBS-STAN-0206-i/leo3-22:39" },
 
     # spring13/homework3
-    { id = "OBS-STAN-0103-YrzpQi-18:16" },
-    { id = "OBS-STAN-0103-YrzpQi-18:40" },
+    { id = "OBS-STAN-0103-YrzpQi-19:16" },
+    { id = "OBS-STAN-0103-YrzpQi-19:40" },
+    { id = "OBS-STAN-0103-YrzpQi-22:16" },
+    { id = "OBS-STAN-0103-YrzpQi-22:46" },
 ]
