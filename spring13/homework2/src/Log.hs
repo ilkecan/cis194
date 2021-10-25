@@ -15,9 +15,11 @@ data LogMessage
   | Unknown !String
   deriving (Show, Eq)
 
+type KnownLogMessage = (MessageType, TimeStamp, String)
+
 data MessageTree
   = Leaf
-  | Node MessageTree !LogMessage MessageTree
+  | Node MessageTree !KnownLogMessage MessageTree
   deriving (Show, Eq)
 
 -- | @testParse p n f@ tests the log file parser @p@ by running it

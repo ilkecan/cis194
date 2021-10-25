@@ -4,6 +4,7 @@ module LogAnalysis
     insert,
     build,
     inOrder,
+    whatWentWrong,
   )
 where
 
@@ -14,3 +15,4 @@ import Exercise1
 import Exercise2 (insert)
 import Exercise3 (build)
 import Exercise4 (inOrder)
+import Exercise5 (whatWentWrong)

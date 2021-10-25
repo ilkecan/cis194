@@ -6,6 +6,7 @@ import Log
   )
 
 -- TODO: handle `parseMessage "E This is not in the right format"`
+-- https://codereview.stackexchange.com/a/127463
 parseMessage :: String -> LogMessage
 parseMessage m = case words m of
   "I" : timeStamp : string -> LogMessage Info (read timeStamp) (unwords string)

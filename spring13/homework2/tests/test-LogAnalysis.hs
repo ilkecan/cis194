@@ -8,14 +8,19 @@ import LogAnalysis
     inOrder,
     insert,
     parseMessage,
+    whatWentWrong,
   )
 import Test.Tasty
 import Test.Tasty.HUnit
+
+-- sampleLogPath :: String
+-- sampleLogPath = "../data/sample.log"
 
 sampleLogMessages :: [LogMessage]
 sampleLogMessages =
   [ LogMessage Info 6 "Completed armadillo processing",
     LogMessage Info 1 "Nothing to report",
+    LogMessage (Error 99) 10 "Flange failed!",
     LogMessage Info 4 "Everything normal",
     LogMessage Info 11 "Initiating self-destruct sequence",
     LogMessage (Error 70) 3 "Way too many pickles",
@@ -30,36 +35,47 @@ sampleLogMessageTree :: MessageTree
 sampleLogMessageTree =
   Node
     ( Node
-        (Node Leaf (LogMessage Info 1 "Nothing to report") Leaf)
-        (LogMessage (Error 20) 2 "Too many pickles")
+        ( Node
+            Leaf
+            (Info, 1, "Nothing to report")
+            Leaf
+        )
+        (Error 20, 2, "Too many pickles")
         ( Node
             ( Node
                 ( Node
                     Leaf
-                    (LogMessage (Error 70) 3 "Way too many pickles")
-                    (Node Leaf (LogMessage Info 4 "Everything normal") Leaf)
+                    (Error 70, 3, "Way too many pickles")
+                    (Node Leaf (Info, 4, "Everything normal") Leaf)
                 )
-                (LogMessage Warning 5 "Flange is due for a check-up")
-                ( Node
-                    Leaf
-                    (LogMessage Info 6 "Completed armadillo processing")
-                    Leaf
-                )
+                (Warning, 5, "Flange is due for a check-up")
+                (Node Leaf (Info, 6, "Completed armadillo processing") Leaf)
             )
-            (LogMessage Info 7 "Out for lunch, back in two time steps")
+            (Info, 7, "Out for lunch, back in two time steps")
             ( Node
                 Leaf
-                ( LogMessage
-                    (Error 65)
-                    8
-                    "Bad pickle-flange interaction detected"
-                )
+                (Error 65, 8, "Bad pickle-flange interaction detected")
                 Leaf
             )
         )
     )
-    (LogMessage Info 9 "Back from lunch")
-    (Node Leaf (LogMessage Info 11 "Initiating self-destruct sequence") Leaf)
+    (Info, 9, "Back from lunch")
+    ( Node
+        ( Node
+            Leaf
+            (Error 99, 10, "Flange failed!")
+            Leaf
+        )
+        (Info, 11, "Initiating self-destruct sequence")
+        Leaf
+    )
+
+severeErrorMessages :: [String]
+severeErrorMessages =
+  [ "Way too many pickles",
+    "Bad pickle-flange interaction detected",
+    "Flange failed!"
+  ]
 
 main :: IO ()
 main = defaultMain tests
@@ -93,38 +109,47 @@ unitTests =
       -- Couldn't match expected type 'IO [LogMessage]'
       --             with actual type '[LogMessage]'
       -- testCase "testParse" $
-      --   testParse parse 10 "../data/sample.log" @?= sampleLogMessages
+      --   testParse parse 10 sampleLogPath @?= sampleLogMessages
       -- Exercise2
       testCase "insert Unknown" $ insert (Unknown "") Leaf @?= Leaf,
-      let mt = Node Leaf (LogMessage Info 1 "") Leaf
+      let mt = Node Leaf (Info, 1, "") Leaf
        in testCase "insert to left" $ insert (Unknown "") mt @?= mt,
-      let m1 = LogMessage Info 2 ""
-          m2 = LogMessage Info 1 ""
-          mt = Node Leaf m1 Leaf
+      let msg1 = (Info, 2, "")
+          msg2 = (Info, 1, "")
+          mt = Node Leaf msg1 Leaf
        in testCase "insert to right" $
-            insert m2 mt @?= Node (Node Leaf m2 Leaf) m1 Leaf,
-      let m1 = LogMessage Info 2 ""
-          m2 = LogMessage Info 3 ""
-          mt = Node Leaf m1 Leaf
+            insert (LogMessage Info 1 "") mt
+              @?= Node (Node Leaf msg2 Leaf) msg1 Leaf,
+      let msg1 = (Info, 2, "")
+          msg2 = (Info, 3, "")
+          mt = Node Leaf msg1 Leaf
        in testCase "insert Unknown 2" $
-            insert m2 mt @?= Node Leaf m1 (Node Leaf m2 Leaf),
+            insert (LogMessage Info 3 "") mt
+              @?= Node Leaf msg1 (Node Leaf msg2 Leaf),
       -- Exercise3
       testCase "build" $ build sampleLogMessages @?= sampleLogMessageTree,
       -- Exercise4
       testCase "inOrder" $
         inOrder sampleLogMessageTree
-          @?= [ LogMessage Info 1 "Nothing to report",
-                LogMessage (Error 20) 2 "Too many pickles",
-                LogMessage (Error 70) 3 "Way too many pickles",
-                LogMessage Info 4 "Everything normal",
-                LogMessage Warning 5 "Flange is due for a check-up",
-                LogMessage Info 6 "Completed armadillo processing",
-                LogMessage Info 7 "Out for lunch, back in two time steps",
-                LogMessage
-                  (Error 65)
-                  8
-                  "Bad pickle-flange interaction detected",
-                LogMessage Info 9 "Back from lunch",
-                LogMessage Info 11 "Initiating self-destruct sequence"
-              ]
+          @?= [ (Info, 1, "Nothing to report"),
+                (Error 20, 2, "Too many pickles"),
+                (Error 70, 3, "Way too many pickles"),
+                (Info, 4, "Everything normal"),
+                (Warning, 5, "Flange is due for a check-up"),
+                (Info, 6, "Completed armadillo processing"),
+                (Info, 7, "Out for lunch, back in two time steps"),
+                (Error 65, 8, "Bad pickle-flange interaction detected"),
+                (Info, 9, "Back from lunch"),
+                (Error 99, 10, "Flange failed!"),
+                (Info, 11, "Initiating self-destruct sequence")
+              ],
+      -- Exercise5
+      -- TODO: learn how to test `whatWentWrong` using `testWhatWentWrong`
+      -- Couldn't match expected type 'IO [String]'
+      --             with actual type '[String]'
+      -- testCase "testWhatWentWrong" $
+      --   testWhatWentWrong parse whatWentWrong sampleLogPath
+      --     @?= severeErrorMessages,
+      testCase "whatWentWrong" $
+        whatWentWrong sampleLogMessages @?= severeErrorMessages
     ]

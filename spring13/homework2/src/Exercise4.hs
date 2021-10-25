@@ -1,10 +1,10 @@
 module Exercise4 where
 
 import Log
-  ( LogMessage,
+  ( KnownLogMessage,
     MessageTree (Leaf, Node),
   )
 
-inOrder :: MessageTree -> [LogMessage]
+inOrder :: MessageTree -> [KnownLogMessage]
 inOrder Leaf = []
 inOrder (Node lmt msg rht) = inOrder lmt ++ msg : inOrder rht

@@ -15,10 +15,10 @@ ignore = [
     { id = "OBS-STAN-0105-JdazAf-6:24" },
 
     # spring13/homework2
-    { id = "OBS-STAN-0009-vU5tw7-11:48" },
-    { id = "OBS-STAN-0009-vU5tw7-13:25" },
-    { id = "OBS-STAN-0009-vU5tw7-15:24" },
-    { id = "OBS-STAN-0009-vU5tw7-15:41" },
-    { id = "OBS-STAN-0206-i/leo3-20:10" },
-    { id = "OBS-STAN-0206-i/leo3-20:34" },
+    { id = "OBS-STAN-0009-vU5tw7-12:48" },
+    { id = "OBS-STAN-0009-vU5tw7-14:25" },
+    { id = "OBS-STAN-0009-vU5tw7-16:24" },
+    { id = "OBS-STAN-0009-vU5tw7-16:41" },
+    { id = "OBS-STAN-0206-i/leo3-22:10" },
+    { id = "OBS-STAN-0206-i/leo3-22:39" },
 ]
