@@ -1,38 +1,76 @@
 #!/usr/bin/env bash
 
+function main() {
+    if [ -d "$1" ]; then
+        cd "$1" || exit
+    fi
+
+    project_root="$(dirname "${BASH_SOURCE[0]}")/.."
+
+    shopt -s globstar
+    GLOBIGNORE='**/dist-newstyle/**:dist-newstyle/**'
+    haskell_files=(./**/*.hs)
+
+    print_on_error reuse
+    print_on_error nixpkgs-fmt
+    print_on_error shellcheck
+    print_on_error ormolu
+
+    print_on_error cabal-build
+    hie_directory="$project_root/dist-newstyle"
+    # stan always uses exit status of zero right now
+    # see: https://github.com/kowainik/stan/issues/246
+    stan
+    print_on_error weeder
+    print_on_error hlint
+    print_on_error scan
+}
+
 function print_on_error() {
     tmp="$(mktemp)"
-    if eval "$1" &> "$tmp"; then
-        echo "${1%% *}: OK"
+    if $1 &> "$tmp"; then
+        echo "$1: OK"
     else
         cat "$tmp"
     fi
     rm "$tmp"
 }
 
-project_root="$(dirname "${BASH_SOURCE[0]}")/.."
+function reuse() {
+    command reuse lint
+}
 
-if [ -d "$1" ]; then
-    cd "$1" || exit
-fi
+function nixpkgs-fmt() {
+    command nixpkgs-fmt "$project_root"
+}
 
-print_on_error "reuse lint"
-print_on_error "nixpkgs-fmt '$project_root'"
-print_on_error "shellcheck '$project_root'/scripts/*"
+function shellcheck() {
+    command shellcheck "$project_root"/scripts/*
+}
 
-shopt -s globstar
-GLOBIGNORE='**/dist-newstyle/**:dist-newstyle/**'
-haskell_files=(./**/*.hs)
+function ormolu() {
+    command ormolu --mode=inplace "${haskell_files[@]}"
+}
 
-ormolu --mode="inplace" "${haskell_files[@]}"
+function cabal-build() {
+    command cabal build all
+}
 
-print_on_error "cabal build all &> /dev/null"
-hie_directory="$project_root/dist-newstyle"
+function stan() {
+    export STAN_USE_DEFAULT_CONFIG="True"
+    command stan --hiedir="$hie_directory" --config-file="$project_root/.stan.toml" --short
+}
 
-export STAN_USE_DEFAULT_CONFIG="True"
-stan --hiedir="$hie_directory" --config-file="$project_root/.stan.toml" --short
+function weeder() {
+    command weeder --hie-directory="$hie_directory" --config="$project_root"/weeder.dhall
+}
 
-print_on_error "weeder --hie-directory='$hie_directory' --config='$project_root/weeder.dhall'"
+function hlint() {
+    command hlint .
+}
 
-print_on_error 'hlint .'
-scan --check-spacing=False --join-comments=False --check-comments=False "${haskell_files[@]}"
+function scan() {
+    command scan --check-spacing=False --join-comments=False --check-comments=False "${haskell_files[@]}"
+}
+
+main "$@"
