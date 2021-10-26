@@ -15,8 +15,10 @@ library
   hs-source-dirs:   src
   exposed-modules:
     Homework4
+    Tree
   other-modules:
     Exercise1
+    Exercise2
 
 test-suite homework4
   import:           shared-properties
