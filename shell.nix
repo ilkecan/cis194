@@ -2,6 +2,7 @@ let
   pkgs = import <nixpkgs> { };
 
   ghcEnv = pkgs.ghc.withPackages (haskellPkgs: with haskellPkgs; [
+    range
     tasty
     tasty-bench
     tasty-hunit

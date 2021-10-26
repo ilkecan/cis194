@@ -19,6 +19,7 @@ constraints:
   tasty-bench ^>=0.2.5,
   tasty-hunit ^>=0.10.0.3,
   tasty-quickcheck ^>=0.10.1.2,
+  range ^>=0.3.0.2,
 
 jobs: $ncpus
 optimization: 2
