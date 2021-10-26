@@ -1,0 +1,30 @@
+cabal-version:  3.4
+name:           homework4
+version:        0.1.0.0
+
+license:        MPL-2.0
+author:         ilkecan
+maintainer:     ilkecan@protonmail.com
+
+common shared-properties
+  default-language: Haskell2010
+  build-depends:    base
+
+library
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:
+    Homework4
+  other-modules:
+    Exercise1
+
+test-suite homework4
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   tests
+  main-is:          test-Homework4.hs
+  build-depends:
+    homework4,
+    tasty,
+    tasty-quickcheck,
+    tasty-hunit,
