@@ -41,9 +41,9 @@ qcProps :: TestTree
 qcProps =
   testGroup
     "QuickCheck properties"
-    [ QC.testProperty "length . skips = length" prop_1,
-      QC.testProperty "length . localMaxima = length" prop_2,
-      QC.testProperty "length . histogram = 11 * (height + 2)" $
+    [ QC.testProperty "length . skips == length" prop_1,
+      QC.testProperty "length . localMaxima == length" prop_2,
+      QC.testProperty "length . histogram == 11 * (height + 2)" $
         forAll digitList prop_3
     ]
 
