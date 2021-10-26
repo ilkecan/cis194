@@ -15,10 +15,8 @@ tests = testGroup "Tests" [properties, unitTests]
 properties :: TestTree
 properties = testGroup "Properties" [qcProps]
 
-prop_1 :: Gen Bool
-prop_1 = do
-  n <- choose (0, 10)
-  return $ length (hanoi n "a" "b" "c") == 2 ^ n - 1
+prop_1 :: Integer -> Bool
+prop_1 n = length (hanoi n "a" "b" "c") == 2 ^ n - 1
 
 -- from Table1 of
 -- https://service.scs.carleton.ca/sites/default/files/tr/TR-04-10.pdf
@@ -47,21 +45,20 @@ hanoi4MinimumNumberOfMoves =
     289
   ]
 
-prop_2 :: Gen Bool
-prop_2 = do
-  n <- choose (0, 20)
-  return $
-    length (hanoi4 n "a" "b" "c" "d")
-      == hanoi4MinimumNumberOfMoves !! fromIntegral n
+prop_2 :: Integer -> Bool
+prop_2 n =
+  length (hanoi4 n "a" "b" "c" "d")
+    == hanoi4MinimumNumberOfMoves !! fromIntegral n
 
 qcProps :: TestTree
 qcProps =
   testGroup
     "QuickCheck properties"
-    [ QC.testProperty "length . hanoi n == 2^n - 1" prop_1,
+    [ QC.testProperty "length . hanoi n == 2^n - 1" $
+        forAll (chooseInteger (0, 10)) prop_1,
       QC.testProperty
         "length . hanoi4 n == hanoi4MinimumNumberOfMoves !! n"
-        prop_2
+        $ forAll (chooseInteger (0, 20)) prop_2
     ]
 
 unitTests :: TestTree
