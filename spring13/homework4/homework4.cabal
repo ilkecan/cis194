@@ -19,6 +19,12 @@ library
   other-modules:
     Exercise1
     Exercise2
+    Exercise3
+
+library exercise3
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:  Exercise3
 
 test-suite homework4
   import:           shared-properties
@@ -27,6 +33,7 @@ test-suite homework4
   main-is:          test-Homework4.hs
   build-depends:
     homework4,
+    homework4:exercise3,
     tasty,
     tasty-quickcheck,
     tasty-hunit,

@@ -12,6 +12,13 @@
         "^Exercise1.parse$",
         "^Log.testParse$",
         "^Log.testWhatWentWrong$",
+
+        -- spring13/homework4
+        "^Tree.getHeight$",
+        "^Exercise3.xor$",
+        "^Exercise3.map'$",
+        "^Exercise3.myFoldl$",
+        "^Exercise3.myFoldl'$",
     ],
     type-class-roots = True,
 }

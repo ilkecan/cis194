@@ -1,8 +1,12 @@
 import Data.Maybe (isJust)
+import Exercise3 (myFoldl')
 import Homework4
   ( foldTree,
     fun1,
     fun2,
+    map',
+    myFoldl,
+    xor,
   )
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -65,6 +69,20 @@ isTreeBalanced (Node _ left _ right) =
 prop_4 :: [Integer] -> Bool
 prop_4 = isTreeBalanced . foldTree
 
+prop_5 :: [Bool] -> Bool
+prop_5 list = xor list == (odd . length . filter id) list
+
+prop_6 :: Fun Int Int -> [Int] -> Bool
+prop_6 (Fn f) list = map' f list == map f list
+
+type FoldFunc = ([Int] -> Int -> [Int]) -> [Int] -> [Int] -> [Int]
+
+prop_7 :: FoldFunc -> Fun ([Int], Int) [Int] -> [Int] -> Bool
+prop_7 fold (Fn2 f) acc = fold f acc [] == acc
+
+prop_8 :: FoldFunc -> [Int] -> Bool
+prop_8 fold list = fold (flip (:)) [] list == reverse list
+
 qcProps :: TestTree
 qcProps =
   testGroup
@@ -72,7 +90,15 @@ qcProps =
     [ QC.testProperty "fun1 == fun1Baseline " prop_1,
       QC.testProperty "fun2 == fun2Baseline" prop_2,
       QC.testProperty "isTreeHeightCorrect . foldTree" prop_3,
-      QC.testProperty "isTreeBalanced . foldTree" prop_4
+      QC.testProperty "isTreeBalanced . foldTree" prop_4,
+      QC.testProperty "xor == odd . length . filter id" prop_5,
+      QC.testProperty "map' == map" prop_6,
+      -- TODO: Is there a way to avoid this duplication i.e., to test prop_7
+      -- and prop_8 for the both fold functions in a more idiomatic way?
+      QC.testProperty "myFoldl' f acc [] = acc" $ prop_7 myFoldl',
+      QC.testProperty "myFoldl' (flip (:)) [] == reverse" $ prop_8 myFoldl',
+      QC.testProperty "myFoldl f acc [] = acc" $ prop_7 myFoldl,
+      QC.testProperty "myFoldl (flip (:)) [] == reverse" $ prop_8 myFoldl
     ]
 
 unitTests :: TestTree
@@ -84,5 +110,11 @@ unitTests =
       testCase "fun2 1" $ fun2 1 @?= 0,
       -- Exercise2
       testCase "foldTree []" $ foldTree ([] :: [Int]) @?= Leaf,
-      testCase "foldTree [1]" $ foldTree [1 :: Int] @?= Node 0 Leaf 1 Leaf
+      testCase "foldTree [1]" $ foldTree [1 :: Int] @?= Node 0 Leaf 1 Leaf,
+      -- Exercise3
+      testCase "xor []" $ xor [] @?= False,
+      testCase "map' (+2) [0..9] == map (+2) [0..9]" $
+        map' (+ 2) [0 .. 9 :: Int] @?= map (+ 2) [0 .. 9],
+      testCase "myFoldl (flip (:)) [] == reverse" $
+        myFoldl (flip (:)) [] [0 .. 9 :: Int] @?= [9, 8 .. 0]
     ]
