@@ -13,6 +13,7 @@ function main() {
 
     print_on_error reuse
     print_on_error nixpkgs-fmt
+    print_on_error nix-linter
     print_on_error shellcheck
     print_on_error ormolu
 
@@ -42,6 +43,10 @@ function reuse() {
 
 function nixpkgs-fmt() {
     command nixpkgs-fmt "$project_root"
+}
+
+function nix-linter() {
+    command nix-linter --recursive "$project_root"
 }
 
 function shellcheck() {

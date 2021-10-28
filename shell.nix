@@ -35,6 +35,7 @@ mkShell {
     cabal-install
     ghcEnv
     hlint
+    nix-linter
     nixpkgs-fmt
     ormolu
     reuse
