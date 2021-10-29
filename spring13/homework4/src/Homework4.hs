@@ -5,6 +5,7 @@ module Homework4
     xor,
     map',
     myFoldl,
+    sieveSundaram,
   )
 where
 
@@ -18,3 +19,4 @@ import Exercise3
     myFoldl,
     xor,
   )
+import Exercise4 (sieveSundaram)

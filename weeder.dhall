@@ -14,11 +14,14 @@
         "^Log.testWhatWentWrong$",
 
         -- spring13/homework4
-        "^Tree.getHeight$",
-        "^Exercise3.xor$",
         "^Exercise3.map'$",
         "^Exercise3.myFoldl$",
         "^Exercise3.myFoldl'$",
+        "^Exercise3.xor$",
+        "^Exercise4.sieveSundaram$",
+        "^Exercise4.sieveSundaram2$",
+        "^Exercise4.sundaram2$",
+        "^Tree.getHeight$",
     ],
     type-class-roots = True,
 }

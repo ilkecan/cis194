@@ -20,6 +20,7 @@ let
   };
 
   ghcEnv = ghc.withPackages (haskellPkgs: with haskellPkgs; [
+    data-ordlist
     range
     tasty
     tasty-bench

@@ -6,6 +6,7 @@ import Homework4
     fun2,
     map',
     myFoldl,
+    sieveSundaram,
     xor,
   )
 import Test.Tasty
@@ -116,5 +117,10 @@ unitTests =
       testCase "map' (+2) [0..9] == map (+2) [0..9]" $
         map' (+ 2) [0 .. 9 :: Int] @?= map (+ 2) [0 .. 9],
       testCase "myFoldl (flip (:)) [] == reverse" $
-        myFoldl (flip (:)) [] [0 .. 9 :: Int] @?= [9, 8 .. 0]
+        myFoldl (flip (:)) [] [0 .. 9 :: Int] @?= [9, 8 .. 0],
+      testCase "sieveSundaram 2" $ sieveSundaram 2 @?= [3, 5],
+      testCase "sieveSundaram 0" $ sieveSundaram 0 @?= [],
+      testCase "sieveSundaram -2" $ sieveSundaram (-2) @?= [],
+      testCase "length . sieveSundaram $ 5000" $
+        (length . sieveSundaram) 5000 @?= 1228
     ]

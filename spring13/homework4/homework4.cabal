@@ -20,11 +20,21 @@ library
     Exercise1
     Exercise2
     Exercise3
+    Exercise4
+  build-depends:
+    data-ordlist
 
 library exercise3
   import:           shared-properties
   hs-source-dirs:   src
   exposed-modules:  Exercise3
+
+library exercise4
+  import:           shared-properties
+  hs-source-dirs:   src
+  exposed-modules:  Exercise4
+  build-depends:
+    data-ordlist
 
 test-suite homework4
   import:           shared-properties
@@ -37,3 +47,21 @@ test-suite homework4
     tasty,
     tasty-quickcheck,
     tasty-hunit,
+
+benchmark sundaram
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-sundaram.hs
+  build-depends:
+    homework4:exercise4,
+    tasty-bench,
+
+benchmark sieveSundaram
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-sieveSundaram.hs
+  build-depends:
+    homework4:exercise4,
+    tasty-bench,
