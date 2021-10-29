@@ -37,6 +37,14 @@ function print_on_error() {
     rm "$tmp"
 }
 
+function error_on_stdout() {
+    if "$@" | grep .; then
+        return 1
+    else
+        return 0
+    fi
+}
+
 function reuse() {
     command reuse lint
 }
@@ -75,7 +83,7 @@ function hlint() {
 }
 
 function scan() {
-    command scan --check-spacing=False --join-comments=False --check-comments=False "${haskell_files[@]}"
+    error_on_stdout command scan --check-spacing=False --join-comments=False --check-comments=False "${haskell_files[@]}"
 }
 
 main "$@"
