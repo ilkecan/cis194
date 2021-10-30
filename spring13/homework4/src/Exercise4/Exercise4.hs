@@ -23,7 +23,7 @@ sundaram1 n =
       | let n' = fromInteger n :: Double,
         i <- [1 .. floor (sqrt (n' / 2) - 1 / 2)],
         let i' = fromInteger i :: Double,
-        j <- [i .. floor ((n' - i') / (2 * i' + 1)) :: Integer]
+        j <- [i .. floor ((n' - i') / (2 * i' + 1))]
     ]
 
 sundaram2 :: Integer -> [Integer]
