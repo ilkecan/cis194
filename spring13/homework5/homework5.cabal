@@ -16,18 +16,33 @@ library
   exposed-modules:  Calc
   build-depends:
     homework5:exercise1,
+    homework5:exercise2,
 
 library expr-t
   import:           shared-properties
   hs-source-dirs:   src/ExprT
   exposed-modules:  ExprT
 
+library parser
+  import:           shared-properties
+  hs-source-dirs:   src/Parser
+  exposed-modules:  Parser
+
 library exercise1
   import:           shared-properties
   hs-source-dirs:   src/Exercise1
   exposed-modules:  Exercise1
   build-depends:
-    homework5:expr-t
+    homework5:expr-t,
+
+library exercise2
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise2
+  exposed-modules:  Exercise2
+  build-depends:
+    homework5:parser,
+    homework5:expr-t,
+    homework5:exercise1,
 
 test-suite calc
   import:           shared-properties

@@ -1,5 +1,6 @@
 import Calc
   ( eval,
+    evalStr,
   )
 import ExprT
   ( ExprT (Add, Lit, Mul),
@@ -40,5 +41,9 @@ unitTests =
   testGroup
     "HUnit tests"
     [ -- Exercise1
-      testCase "eval" $ eval (Mul (Add (Lit 2) (Lit 3)) (Lit 4)) @?= 20
+      testCase "eval" $ eval (Mul (Add (Lit 2) (Lit 3)) (Lit 4)) @?= 20,
+      testCase "evalStr valid 1" $ evalStr "2" @?= Just 2,
+      testCase "evalStr valid 2" $ evalStr "(2+3)*4" @?= Just 20,
+      testCase "evalStr valid 3" $ evalStr "2+3*4" @?= Just 14,
+      testCase "evalStr invalid" $ evalStr "2+3*" @?= Nothing
     ]
