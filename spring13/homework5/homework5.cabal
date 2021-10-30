@@ -60,6 +60,7 @@ test-suite calc
     homework5,
     homework5:expr-t,
     homework5:expr,
+    homework5:parser,
     tasty,
     tasty-quickcheck,
     tasty-hunit,
