@@ -17,16 +17,26 @@ library
   build-depends:
     homework5:exercise1,
     homework5:exercise2,
+    homework5:exercise5,
 
 library expr-t
   import:           shared-properties
   hs-source-dirs:   src/ExprT
   exposed-modules:  ExprT
+  build-depends:
+    homework5:expr,
 
 library parser
   import:           shared-properties
   hs-source-dirs:   src/Parser
   exposed-modules:  Parser
+
+library stack-vm
+  import:           shared-properties
+  hs-source-dirs:   src/StackVM
+  exposed-modules:  StackVM
+  build-depends:
+    homework5:expr,
 
 library exercise1
   import:           shared-properties
@@ -48,8 +58,15 @@ library expr
   import:           shared-properties
   hs-source-dirs:   src/Expr
   exposed-modules:  Expr
+
+library exercise5
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise5
+  exposed-modules:  Exercise5
   build-depends:
-    homework5:expr-t,
+    homework5:expr,
+    homework5:stack-vm,
+    homework5:parser,
 
 test-suite calc
   import:           shared-properties
@@ -61,6 +78,7 @@ test-suite calc
     homework5:expr-t,
     homework5:expr,
     homework5:parser,
+    homework5:stack-vm,
     tasty,
     tasty-quickcheck,
     tasty-hunit,

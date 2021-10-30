@@ -1,5 +1,6 @@
 import Calc
-  ( eval,
+  ( compile,
+    eval,
     evalStr,
   )
 import Expr
@@ -7,10 +8,14 @@ import Expr
     MinMax (MinMax),
     Mod7 (Mod7),
   )
-import ExprT
-  ( ExprT (Add, Lit, Mul),
-  )
+import ExprT (ExprT (Add, Lit, Mul))
 import Parser (parseExp)
+import StackVM
+  ( StackExp (PushI),
+    StackVal (IVal),
+    stackVM,
+  )
+import qualified StackVM as VM (StackExp (Add, Mul))
 import Test.Tasty
 import Test.Tasty.HUnit
 import Test.Tasty.QuickCheck as QC
@@ -68,5 +73,14 @@ unitTests =
       testCase "testExp :: Maybe MinMax" $
         (testExp :: Maybe MinMax) @?= Just (MinMax 5),
       testCase "testExp :: Maybe Mod7" $
-        (testExp :: Maybe Mod7) @?= Just (Mod7 0)
+        (testExp :: Maybe Mod7) @?= Just (Mod7 0),
+      -- Exercise5
+      testCase "stackVM" $
+        stackVM [PushI 3, PushI (-4), VM.Mul, PushI 5, VM.Add]
+          @?= Right (IVal (-7)),
+      testCase "compile 1" $
+        compile "3 + 5" @?= Just [PushI 3, PushI 5, VM.Add],
+      testCase "compile 2" $
+        compile "(3 * -4) + 5"
+          @?= Just [PushI 3, PushI (-4), VM.Mul, PushI 5, VM.Add]
     ]
