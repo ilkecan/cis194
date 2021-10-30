@@ -12,29 +12,57 @@ common shared-properties
 
 library
   import:           shared-properties
-  hs-source-dirs:   src
+  hs-source-dirs:
+    src/ValidatingCreditCardNumbers
+    src/TheTowersOfHanoi
   exposed-modules:
     ValidatingCreditCardNumbers
     TheTowersOfHanoi
-  other-modules:
-    Exercise1
-    Exercise2
-    Exercise3
-    Exercise4
-    Exercise5
-    Exercise6
+  build-depends:
+    homework1:exercise1,
+    homework1:exercise2,
+    homework1:exercise3,
+    homework1:exercise4,
+    homework1:exercise5,
+    homework1:exercise6,
+
+library exercise1
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise1
+  exposed-modules:  Exercise1
 
 library exercise2
   import:           shared-properties
-  hs-source-dirs:   src
+  hs-source-dirs:   src/Exercise2
   exposed-modules:  Exercise2
+
+library exercise3
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise3
+  exposed-modules:  Exercise3
+  build-depends:
+    homework1:exercise1,
+
+library exercise4
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise4
+  exposed-modules:  Exercise4
+  build-depends:
+    homework1:exercise1,
+    homework1:exercise2,
+    homework1:exercise3,
+
+library exercise5
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise5
+  exposed-modules:  Exercise5
 
 library exercise6
   import:           shared-properties
-  hs-source-dirs:   src
+  hs-source-dirs:   src/Exercise6
   exposed-modules:  Exercise6
-  other-modules:
-    Exercise5,
+  build-depends:
+    homework1:exercise5,
 
 test-suite validating-credit-card-numbers
   import:           shared-properties

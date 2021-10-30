@@ -12,15 +12,29 @@ common shared-properties
 
 library
   import:           shared-properties
-  hs-source-dirs:   src
+  hs-source-dirs:   src/Golf
+  exposed-modules:  Golf
+  build-depends:
+    homework3:exercise1,
+    homework3:exercise2,
+    homework3:exercise3,
+
+library exercise1
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise1
+  exposed-modules:  Exercise1
+
+library exercise2
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise2
+  exposed-modules:  Exercise2
+
+library exercise3
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise3
+  exposed-modules:  Exercise3
   build-depends:
     range,
-  exposed-modules:
-    Golf
-  other-modules:
-    Exercise1
-    Exercise2
-    Exercise3
 
 test-suite golf
   import:           shared-properties

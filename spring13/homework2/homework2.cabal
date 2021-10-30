@@ -12,16 +12,57 @@ common shared-properties
 
 library
   import:           shared-properties
-  hs-source-dirs:   src
-  exposed-modules:
-    Log
-    LogAnalysis
-  other-modules:
-    Exercise1
-    Exercise2
-    Exercise3
-    Exercise4
-    Exercise5
+  hs-source-dirs:   src/LogAnalysis
+  exposed-modules:  LogAnalysis
+  build-depends:
+    homework2:exercise1,
+    homework2:exercise2,
+    homework2:exercise3,
+    homework2:exercise4,
+    homework2:exercise5,
+
+library exercise1
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise1
+  exposed-modules:  Exercise1
+  build-depends:
+    homework2:log,
+
+library exercise2
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise2
+  exposed-modules:  Exercise2
+  build-depends:
+    homework2:log,
+
+library exercise3
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise3
+  exposed-modules:  Exercise3
+  build-depends:
+    homework2:log,
+    homework2:exercise2,
+
+library exercise4
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise4
+  exposed-modules:  Exercise4
+  build-depends:
+    homework2:log,
+
+library exercise5
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise5
+  exposed-modules:  Exercise5
+  build-depends:
+    homework2:log,
+    homework2:exercise3,
+    homework2:exercise4,
+
+library log
+  import:           shared-properties
+  hs-source-dirs:   src/Log
+  exposed-modules:  Log
 
 test-suite log-analysis
   import:           shared-properties
@@ -30,6 +71,7 @@ test-suite log-analysis
   main-is:          test-LogAnalysis.hs
   build-depends:
     homework2,
+    homework2:log,
     tasty,
     tasty-quickcheck,
     tasty-hunit,
