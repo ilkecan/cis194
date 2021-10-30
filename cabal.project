@@ -3,6 +3,7 @@ packages:
   spring13/homework2/
   spring13/homework3/
   spring13/homework4/
+  spring13/homework5/
 
 -- https://github.com/haskell/cabal/issues/3579
 -- https://github.com/haskell/cabal/pull/7374
@@ -37,6 +38,16 @@ package homework3
     -Wredundant-constraints
 
 package homework4
+  ghc-options:
+    -fwrite-ide-info
+    -Wall
+    -Werror
+    -Wcompat
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wredundant-constraints
+
+package homework5
   ghc-options:
     -fwrite-ide-info
     -Wall
