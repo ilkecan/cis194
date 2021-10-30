@@ -44,6 +44,13 @@ library exercise2
     homework5:expr-t,
     homework5:exercise1,
 
+library expr
+  import:           shared-properties
+  hs-source-dirs:   src/Expr
+  exposed-modules:  Expr
+  build-depends:
+    homework5:expr-t,
+
 test-suite calc
   import:           shared-properties
   type:             exitcode-stdio-1.0
@@ -52,6 +59,7 @@ test-suite calc
   build-depends:
     homework5,
     homework5:expr-t,
+    homework5:expr,
     tasty,
     tasty-quickcheck,
     tasty-hunit,

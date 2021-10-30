@@ -2,6 +2,9 @@ import Calc
   ( eval,
     evalStr,
   )
+import Expr
+  ( Expr (add, lit, mul),
+  )
 import ExprT
   ( ExprT (Add, Lit, Mul),
   )
@@ -45,5 +48,8 @@ unitTests =
       testCase "evalStr valid 1" $ evalStr "2" @?= Just 2,
       testCase "evalStr valid 2" $ evalStr "(2+3)*4" @?= Just 20,
       testCase "evalStr valid 3" $ evalStr "2+3*4" @?= Just 14,
-      testCase "evalStr invalid" $ evalStr "2+3*" @?= Nothing
+      testCase "evalStr invalid" $ evalStr "2+3*" @?= Nothing,
+      testCase "Expr :: ExprT == ExprT" $
+        (mul (add (lit 2) (lit 3)) (lit 4) :: ExprT)
+          @?= Mul (Add (Lit 2) (Lit 3)) (Lit 4)
     ]
