@@ -35,10 +35,10 @@ hanoi4MinimumNumberOfMoves =
     289
   ]
 
-prop1 :: Integer -> Bool
+prop1 :: Int -> Bool
 prop1 n =
-  length (hanoi4 n "a" "b" "c" "d")
-    == hanoi4MinimumNumberOfMoves !! fromIntegral n
+  length (hanoi4 (toInteger n) "a" "b" "c" "d")
+    == hanoi4MinimumNumberOfMoves !! n
 
 qcProps :: TestTree
 qcProps =
@@ -46,7 +46,7 @@ qcProps =
     "QuickCheck properties"
     [ QC.testProperty
         "length . hanoi4 n == hanoi4MinimumNumberOfMoves !! n"
-        $ forAll (chooseInteger (0, 20)) prop1
+        $ forAll (chooseInt (0, 20)) prop1
     ]
 
 unitTests :: TestTree
