@@ -56,11 +56,19 @@ test-suite homework4
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   tests
-  main-is:          test-Homework4.hs
+  main-is:          Driver.hs
+  other-modules:
+    TestExercise1
+    TestExercise2
+    TestExercise3
+    TestExercise4
   build-depends:
-    homework4,
+    homework4:exercise1,
+    homework4:exercise2,
     homework4:exercise3,
+    homework4:exercise4,
     homework4:tree,
+
     tasty,
     tasty-quickcheck,
     tasty-hunit,

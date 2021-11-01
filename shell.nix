@@ -24,6 +24,7 @@ let
     range
     tasty
     tasty-bench
+    tasty-discover
     tasty-hunit
     (tasty-quickcheck.override {
       QuickCheck = myQC;
