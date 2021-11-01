@@ -18,6 +18,7 @@ library
     homework5:exercise1,
     homework5:exercise2,
     homework5:exercise5,
+    homework5:exercise6,
 
 library expr-t
   import:           shared-properties
@@ -68,17 +69,28 @@ library exercise5
     homework5:stack-vm,
     homework5:parser,
 
+library exercise6
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise6
+  exposed-modules:  Exercise6
+  build-depends:
+    homework5:expr,
+    containers,
+
 test-suite calc
   import:           shared-properties
   type:             exitcode-stdio-1.0
   hs-source-dirs:   tests
   main-is:          test-Calc.hs
+  other-modules:
+    TestExercise6
   build-depends:
     homework5,
     homework5:expr-t,
     homework5:expr,
     homework5:parser,
     homework5:stack-vm,
+    homework5:exercise6,
     tasty,
     tasty-quickcheck,
     tasty-hunit,

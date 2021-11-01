@@ -53,4 +53,8 @@ ignore = [
     { id = "OBS-STAN-0206-gBa+qh-7:9" },
     { id = "OBS-STAN-0206-gBa+qh-8:15" },
     { id = "OBS-STAN-0206-gBa+qh-8:9" },
+    { id = "OBS-STAN-0206-DH/NtJ-20:9" },
+    { id = "OBS-STAN-0206-DH/NtJ-20:18" },
+    { id = "OBS-STAN-0206-DH/NtJ-21:9" },
+    { id = "OBS-STAN-0206-DH/NtJ-21:18" },
 ]

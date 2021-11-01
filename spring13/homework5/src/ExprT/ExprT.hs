@@ -9,6 +9,6 @@ data ExprT
   deriving (Show, Eq)
 
 instance Expr ExprT where
-  lit n = Lit n
-  add expr1 expr2 = Add expr1 expr2
-  mul expr1 expr2 = Mul expr1 expr2
+  lit = Lit
+  add = Add
+  mul = Mul
