@@ -4,6 +4,7 @@ packages:
   spring13/homework3/
   spring13/homework4/
   spring13/homework5/
+  spring13/homework6/
 
 -- https://github.com/haskell/cabal/issues/3579
 -- https://github.com/haskell/cabal/pull/7374
@@ -57,6 +58,15 @@ package homework5
     -Wincomplete-uni-patterns
     -Wredundant-constraints
 
+package homework6
+  ghc-options:
+    -fwrite-ide-info
+    -Wall
+    -Werror
+    -Wcompat
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wredundant-constraints
 
 jobs: $ncpus
 optimization: 2

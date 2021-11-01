@@ -57,4 +57,7 @@ ignore = [
     { id = "OBS-STAN-0206-gBa+qh-7:9" },
     { id = "OBS-STAN-0206-gBa+qh-8:15" },
     { id = "OBS-STAN-0206-gBa+qh-8:9" },
+
+    # spring13/homework6
+    { id = "OBS-STAN-0005-zPgy35-37:52" },
 ]
