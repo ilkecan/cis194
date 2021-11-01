@@ -16,11 +16,17 @@ library
   exposed-modules:  Fibonacci
   build-depends:
     homework6:exercise1,
+    homework6:exercise2,
 
 library exercise1
   import:           shared-properties
   hs-source-dirs:   src/Exercise1
   exposed-modules:  Exercise1
+
+library exercise2
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise2
+  exposed-modules:  Exercise2
 
 test-suite fibonacci
   import:           shared-properties
@@ -29,9 +35,22 @@ test-suite fibonacci
   main-is:          Driver.hs
   other-modules:
     TestExercise1
+    TestExercise2
   build-depends:
     homework6:exercise1,
+    homework6:exercise2,
 
     tasty,
     tasty-hunit,
     tasty-quickcheck,
+
+benchmark fibs
+  import:           shared-properties
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   benches
+  main-is:          bench-fibs.hs
+  build-depends:
+    homework6:exercise1,
+    homework6:exercise2,
+
+    tasty-bench,

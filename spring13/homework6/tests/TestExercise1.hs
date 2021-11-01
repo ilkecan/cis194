@@ -1,6 +1,9 @@
 module TestExercise1 where
 
-import Exercise1 (fib)
+import Exercise1
+  ( fib,
+    fibs1,
+  )
 import Test.Tasty
 import Test.Tasty.HUnit
 import Test.Tasty.QuickCheck as QC
@@ -52,5 +55,7 @@ unitTests =
       testCase "fib one" $ fib 1 @?= 1,
       testCase "fib negative even" $ fib (-6) @?= -8,
       testCase "fib negative odd" $ fib (-5) @?= 5,
-      testCase "fib ten" $ fib 10 @?= 55
+      testCase "fib ten" $ fib 10 @?= 55,
+      testCase "take 21 fibs1 == fibonacciSequence" $
+        take 21 fibs1 @?= fibonacciSequence
     ]
