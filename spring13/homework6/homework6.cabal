@@ -28,6 +28,11 @@ library exercise2
   hs-source-dirs:   src/Exercise2
   exposed-modules:  Exercise2
 
+library stream
+  import:           shared-properties
+  hs-source-dirs:   src/Stream
+  exposed-modules:  Stream
+
 test-suite fibonacci
   import:           shared-properties
   type:             exitcode-stdio-1.0
@@ -36,9 +41,11 @@ test-suite fibonacci
   other-modules:
     TestExercise1
     TestExercise2
+    TestStream
   build-depends:
     homework6:exercise1,
     homework6:exercise2,
+    homework6:stream,
 
     tasty,
     tasty-hunit,

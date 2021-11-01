@@ -6,7 +6,7 @@ import Test.Tasty
 import Test.Tasty.HUnit
 
 test_all :: TestTree
-test_all = testGroup "TestExercise1" [unitTests]
+test_all = testGroup "TestExercise2" [unitTests]
 
 unitTests :: TestTree
 unitTests =

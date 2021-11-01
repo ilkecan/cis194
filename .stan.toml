@@ -60,4 +60,5 @@ ignore = [
 
     # spring13/homework6
     { id = "OBS-STAN-0005-zPgy35-40:52" },
+    { id = "OBS-STAN-0206-3wY4ae-4:13" },
 ]
