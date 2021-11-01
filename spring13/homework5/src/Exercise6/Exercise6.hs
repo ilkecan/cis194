@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Exercise6 where
 
@@ -30,13 +29,13 @@ instance Expr VarExprT where
 instance HasVars VarExprT where
   var = Var
 
-type VarExprT2 = (Map String Integer -> Maybe Integer)
+newtype VarExprT2 = VarExprT2 (Map String Integer -> Maybe Integer)
 
 instance HasVars VarExprT2 where
-  var = M.lookup
+  var = VarExprT2 . M.lookup
 
 instance Expr VarExprT2 where
-  lit = const . Just
+  lit = VarExprT2 . const . Just
   add = applyOperator (+)
   mul = applyOperator (*)
 
@@ -44,11 +43,11 @@ applyOperator ::
   (Integer -> Integer -> Integer) ->
   VarExprT2 ->
   VarExprT2 ->
-  Map String Integer ->
-  Maybe Integer
-applyOperator operator expr1 expr2 vars = case (expr1 vars, expr2 vars) of
-  (Just n1, Just n2) -> Just $ operator n1 n2
-  (_, _) -> Nothing
+  VarExprT2
+applyOperator operator (VarExprT2 expr1) (VarExprT2 expr2) =
+  VarExprT2 $ \vars -> case (expr1 vars, expr2 vars) of
+    (Just n1, Just n2) -> Just $ operator n1 n2
+    (_, _) -> Nothing
 
 withVars :: [(String, Integer)] -> VarExprT2 -> Maybe Integer
-withVars vars expr = expr $ fromList vars
+withVars vars (VarExprT2 expr) = expr $ fromList vars
