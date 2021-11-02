@@ -5,6 +5,8 @@ module Fibonacci
     streamRepeat,
     streamMap,
     streamFromSeed,
+    nats,
+    ruler,
   )
 where
 
@@ -17,4 +19,8 @@ import Exercise4
   ( streamFromSeed,
     streamMap,
     streamRepeat,
+  )
+import Exercise5
+  ( nats,
+    ruler,
   )
