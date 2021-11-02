@@ -1,10 +1,10 @@
 module Exercise5 where
 
-import Exercise4
-  ( streamFromSeed,
+import Stream
+  ( Stream (Cons),
+    streamFromSeed,
     streamRepeat,
   )
-import Stream (Stream (Cons))
 
 nats :: Stream Integer
 nats = streamFromSeed (+ 1) 0

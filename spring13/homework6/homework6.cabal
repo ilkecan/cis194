@@ -18,7 +18,6 @@ library
     homework6:exercise1,
     homework6:exercise2,
     homework6:stream,
-    homework6:exercise4,
     homework6:exercise5,
     homework6:exercise6,
 
@@ -37,20 +36,12 @@ library stream
   hs-source-dirs:   src/Stream
   exposed-modules:  Stream
 
-library exercise4
-  import:           shared-properties
-  hs-source-dirs:   src/Exercise4
-  exposed-modules:  Exercise4
-  build-depends:
-    homework6:stream,
-
 library exercise5
   import:           shared-properties
   hs-source-dirs:   src/Exercise5
   exposed-modules:  Exercise5
   build-depends:
     homework6:stream,
-    homework6:exercise4,
 
 library exercise6
   import:           shared-properties
@@ -58,7 +49,6 @@ library exercise6
   exposed-modules:  Exercise6
   build-depends:
     homework6:stream,
-    homework6:exercise4,
 
 test-suite fibonacci
   import:           shared-properties
@@ -69,14 +59,12 @@ test-suite fibonacci
     TestExercise1
     TestExercise2
     TestStream
-    TestExercise4
     TestExercise5
     TestExercise6
   build-depends:
     homework6:exercise1,
     homework6:exercise2,
     homework6:stream,
-    homework6:exercise4,
     homework6:exercise5,
     homework6:exercise6,
 

@@ -17,14 +17,14 @@ import Exercise1
     fibs1,
   )
 import Exercise2 (fibs2)
-import Exercise4
-  ( streamFromSeed,
-    streamMap,
-    streamRepeat,
-  )
 import Exercise5
   ( nats,
     ruler,
   )
 import Exercise6 (x)
-import Stream (streamToList)
+import Stream
+  ( streamFromSeed,
+    streamMap,
+    streamRepeat,
+    streamToList,
+  )
