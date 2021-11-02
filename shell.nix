@@ -36,6 +36,7 @@ mkShell {
   packages = with pkgs; with haskellPackages; [
     cabal-install
     ghcEnv
+    ghcid
     hlint
     nix-linter
     nixpkgs-fmt
