@@ -3,12 +3,14 @@ module Fibonacci
     fibs1,
     fibs2,
     streamToList,
+    listToStream,
     streamRepeat,
     streamMap,
     streamFromSeed,
     nats,
     ruler,
     x,
+    fibs3,
   )
 where
 
@@ -21,9 +23,13 @@ import Exercise5
   ( nats,
     ruler,
   )
-import Exercise6 (x)
+import Exercise6
+  ( fibs3,
+    x,
+  )
 import Stream
-  ( streamFromSeed,
+  ( listToStream,
+    streamFromSeed,
     streamMap,
     streamRepeat,
     streamToList,
