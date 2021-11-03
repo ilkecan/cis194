@@ -11,6 +11,7 @@ module Fibonacci
     ruler,
     x,
     fibs3,
+    fib4,
   )
 where
 
@@ -27,6 +28,7 @@ import Exercise6
   ( fibs3,
     x,
   )
+import Exercise7 (fib4)
 import Stream
   ( listToStream,
     streamFromSeed,

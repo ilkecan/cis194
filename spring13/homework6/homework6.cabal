@@ -20,6 +20,7 @@ library
     homework6:stream,
     homework6:exercise5,
     homework6:exercise6,
+    homework6:exercise7,
 
 library exercise1
   import:           shared-properties
@@ -50,6 +51,11 @@ library exercise6
   build-depends:
     homework6:stream,
 
+library exercise7
+  import:           shared-properties
+  hs-source-dirs:   src/Exercise7
+  exposed-modules:  Exercise7
+
 test-suite fibonacci
   import:           shared-properties
   type:             exitcode-stdio-1.0
@@ -61,12 +67,14 @@ test-suite fibonacci
     TestStream
     TestExercise5
     TestExercise6
+    TestExercise7
   build-depends:
     homework6:exercise1,
     homework6:exercise2,
     homework6:stream,
     homework6:exercise5,
     homework6:exercise6,
+    homework6:exercise7,
 
     tasty,
     tasty-hunit,
